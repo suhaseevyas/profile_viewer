@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% load static %}
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+  <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <!-- Bootstrap JS -->
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <style>
+    .img {
+      height: 350p;
+      width: 300px;
+      border-radius: 10px;
+      border-color: #2c3e50;
+      border-width: 2px;
+    }
+  </style>
+  <title>{% block title %} {% endblock title %}</title>
+</head>
+
+<body style="background-color: #2c3e50;">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #2c3e50">
+    <a class="navbar-brand" href="#">My_site</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <!-- <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
+        </li>
+      </ul>
+      <button type="button" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
+        onclick="logmeout();" data-toggle="modal" data-target="#loginmodal"> Logout
+      </button>
+    </div>
+  </nav>
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags}} alert-dismissible fade show" role="alert">
+    <strong>Message:</strong> {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+
+  {% block includes %}
+  <div style="background-color: #2c3e50; width:100%; height: 100%">
+    <center>
+      <div class="container mx-auto col px-md-5" style="margin-top: 40px;">
+        <div id="profileCard" class="card text-center "
+          style="width: 40rem; padding: 20px; padding-top: 50px; padding-bottom: 20px">
+          <h1>Profile</h1>
+          <center>
+            <img id="myprofile" src={{ current_user.fileupload }} class="d-flex justify-content-center img" alt="...">
+            <!-- <img id="myprofile2" src= {{ current_user.fileupload }} class="imgbig flyout"  alt="..."> -->
+          </center>
+          <div class="card-body">
+            <b>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5 text-right">Email Address:</div>
+                <div class="col-md-5 text-left">{{ current_user.email }}</div>
+                <div class="col-md-1"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5 text-right">
+                  First Name:</div>
+                <div class="col-md-5 text-left"> {{ current_user.firstname }} </div>
+                <div class="col-md-1"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5 text-right">
+                  Last Name: </div>
+                <div class="col-md-5 text-left">{{ current_user.lastname }} </div>
+                <div class="col-md-1"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5 text-right">
+                  Password:</div>
+                <div class="col-md-5 text-left">{{current_user.password}}</div>
+                <div class="col-md-1"></div>
+              </div>
+            </b></div>
+        </div>
+      </div>
+      <div class="card mycard" style="width: 40rem; padding: 20px">
+        <span style="color: gray; text-align:left">Choose Background color...</span>
+        <div class="row">
+          <div id="c1" class="btns col-sm"
+            style="background-color: #5fe6eb; height:50px; width: 50px; border-radius: 50px"></div>
+          <div id="c2" class="btns col-sm"
+            style="background-color: #a569f3; height:50px; width: 50px; border-radius: 50px"></div>
+          <div id="c3" class="btns col-sm"
+            style="background-color: #67f886; height:50px; width: 50px; border-radius: 50px"></div>
+          <div id="c4" class="btns col-sm"
+            style="background-color: #fda054; height:50px; width: 50px; border-radius: 50px"></div>
+          <div id="c5" class="btns col-sm"
+            style="background-color: #fcdc50; height:50px; width: 50px; border-radius: 50px"></div>
+          <div id="c6" class="btns col-sm"
+            style="background-color: #f58585; height:50px; width: 50px; border-radius: 50px"></div>
+        </div>
+      </div>
+    </center>
+  </div>
+  {% endblock includes %}
+  {% block body %}{% endblock body %}
+</body>
+
+</html>
+
+<script src="{% static 'js/myjs.js' %}"></script>
+<script>
+  $(document).ready(function () {
+
+    $("#c1").on('click', function () {
+      $("#profileCard").css("background-color", "#5fe6eb");
+    })
+    $("#c2").on('click', function () {
+      $("#profileCard").css("background-color", "#a569f3");
+    })
+    $("#c3").on('click', function () {
+      $("#profileCard").css("background-color", "#67f886");
+    })
+    $("#c4").on('click', function () {
+      $("#profileCard").css("background-color", "#fda054");
+    })
+    $("#c5").on('click', function () {
+      $("#profileCard").css("background-color", "#fcdc50");
+    })
+    $("#c6").on('click', function () {
+      $("#profileCard").css("background-color", "#f58585");
+    })
+    // $("#myprofile").hover(function(){
+    // alert("clicked");
+    // })
+    // })
+  });
+</script>
